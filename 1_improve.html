@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting 1% Better Each Day - Nov 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 24px;
+        }
+        
+        h2 {
+            font-size: 20px;
+            font-style: italic;
+            color: #333;
+        }
+        
+        .attribution {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .dashboard {
+            margin-top: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+            font-size: 12px;
+        }
+        
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        
+        .protocol-cell {
+            text-align: left;
+            padding: 5px;
+            min-width: 120px;
+        }
+        
+        .protocol-input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            padding: 3px;
+            font-size: 12px;
+        }
+        
+        .protocol-input:focus {
+            outline: 1px solid #4CAF50;
+            background: #f0f8ff;
+        }
+        
+        .day-header {
+            font-size: 11px;
+            padding: 5px;
+        }
+        
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .total-row {
+            font-weight: bold;
+            background-color: #f0f0f0;
+        }
+        
+        .progress-section {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 40px 40px 60px 60px;
+        }
+        
+        canvas {
+            display: block;
+        }
+        
+        .chart-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Nov 2025</h1>
+            <h2>Getting 1% Better Each Day</h2>
+            <div class="attribution">@thermayanknegi</div>
+        </div>
+        
+        <div class="dashboard">
+            <h3>30 Day Dashboard</h3>
+            <table id="protocolTable">
+                <thead>
+                    <tr>
+                        <th>Protocols</th>
+                        <th class="day-header">1<br>Sa</th>
+                        <th class="day-header">2<br>Su</th>
+                        <th class="day-header">3<br>M</th>
+                        <th class="day-header">4<br>T</th>
+                        <th class="day-header">5<br>W</th>
+                        <th class="day-header">6<br>Th</th>
+                        <th class="day-header">7<br>F</th>
+                        <th class="day-header">8<br>Sa</th>
+                        <th class="day-header">9<br>Su</th>
+                        <th class="day-header">10<br>M</th>
+                        <th class="day-header">11<br>T</th>
+                        <th class="day-header">12<br>W</th>
+                        <th class="day-header">13<br>Th</th>
+                        <th class="day-header">14<br>F</th>
+                        <th class="day-header">15<br>Sa</th>
+                        <th class="day-header">16<br>Su</th>
+                        <th class="day-header">17<br>M</th>
+                        <th class="day-header">18<br>T</th>
+                        <th class="day-header">19<br>W</th>
+                        <th class="day-header">20<br>Th</th>
+                        <th class="day-header">21<br>F</th>
+                        <th class="day-header">22<br>Sa</th>
+                        <th class="day-header">23<br>Su</th>
+                        <th class="day-header">24<br>M</th>
+                        <th class="day-header">25<br>T</th>
+                        <th class="day-header">26<br>W</th>
+                        <th class="day-header">27<br>Th</th>
+                        <th class="day-header">28<br>F</th>
+                        <th class="day-header">29<br>Sa</th>
+                        <th class="day-header">30<br>Su</th>
+                    </tr>
+                </thead>
+                <tbody id="protocolBody">
+                </tbody>
+                <tfoot>
+                    <tr class="total-row">
+                        <td>Total Points</td>
+                        <td id="total-1">0</td>
+                        <td id="total-2">0</td>
+                        <td id="total-3">0</td>
+                        <td id="total-4">0</td>
+                        <td id="total-5">0</td>
+                        <td id="total-6">0</td>
+                        <td id="total-7">0</td>
+                        <td id="total-8">0</td>
+                        <td id="total-9">0</td>
+                        <td id="total-10">0</td>
+                        <td id="total-11">0</td>
+                        <td id="total-12">0</td>
+                        <td id="total-13">0</td>
+                        <td id="total-14">0</td>
+                        <td id="total-15">0</td>
+                        <td id="total-16">0</td>
+                        <td id="total-17">0</td>
+                        <td id="total-18">0</td>
+                        <td id="total-19">0</td>
+                        <td id="total-20">0</td>
+                        <td id="total-21">0</td>
+                        <td id="total-22">0</td>
+                        <td id="total-23">0</td>
+                        <td id="total-24">0</td>
+                        <td id="total-25">0</td>
+                        <td id="total-26">0</td>
+                        <td id="total-27">0</td>
+                        <td id="total-28">0</td>
+                        <td id="total-29">0</td>
+                        <td id="total-30">0</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        
+        <div class="progress-section">
+            <div class="chart-title">Daily Progress Chart</div>
+            <div class="chart-container">
+                <canvas id="progressChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const NUM_PROTOCOLS = 12;
+        const NUM_DAYS = 30;
+        
+        let trackerData = {
+            protocols: [],
+            checkboxes: {}
+        };
+
+        function initializeData() {
+            const saved = localStorage.getItem('trackerData');
+            if (saved) {
+                trackerData = JSON.parse(saved);
+            } else {
+                trackerData.protocols = Array(NUM_PROTOCOLS).fill('');
+                trackerData.checkboxes = {};
+            }
+            
+            if (!trackerData.protocols || trackerData.protocols.length === 0) {
+                trackerData.protocols = Array(NUM_PROTOCOLS).fill('');
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('trackerData', JSON.stringify(trackerData));
+        }
+
+        function renderProtocols() {
+            const tbody = document.getElementById('protocolBody');
+            tbody.innerHTML = '';
+            
+            for (let i = 0; i < NUM_PROTOCOLS; i++) {
+                const row = document.createElement('tr');
+                
+                const protocolCell = document.createElement('td');
+                protocolCell.className = 'protocol-cell';
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'protocol-input';
+                input.placeholder = `Protocol ${i + 1}`;
+                input.value = trackerData.protocols[i] || '';
+                input.addEventListener('input', (e) => {
+                    trackerData.protocols[i] = e.target.value;
+                    saveData();
+                });
+                protocolCell.appendChild(input);
+                row.appendChild(protocolCell);
+                
+                for (let day = 1; day <= NUM_DAYS; day++) {
+                    const td = document.createElement('td');
+                    const checkbox = document.createElement('input');
+                    checkbox.type = 'checkbox';
+                    checkbox.id = `cb-${i}-${day}`;
+                    checkbox.checked = trackerData.checkboxes[`${i}-${day}`] || false;
+                    checkbox.addEventListener('change', (e) => {
+                        trackerData.checkboxes[`${i}-${day}`] = e.target.checked;
+                        saveData();
+                        updateTotals();
+                        drawChart();
+                    });
+                    td.appendChild(checkbox);
+                    row.appendChild(td);
+                }
+                
+                tbody.appendChild(row);
+            }
+            
+            updateTotals();
+            drawChart();
+        }
+
+        function updateTotals() {
+            for (let day = 1; day <= NUM_DAYS; day++) {
+                let total = 0;
+                for (let i = 0; i < NUM_PROTOCOLS; i++) {
+                    if (trackerData.checkboxes[`${i}-${day}`]) {
+                        total++;
+                    }
+                }
+                document.getElementById(`total-${day}`).textContent = total;
+            }
+        }
+
+        function drawChart() {
+            const canvas = document.getElementById('progressChart');
+            const ctx = canvas.getContext('2d');
+            const container = canvas.parentElement;
+            
+            canvas.width = container.clientWidth - 100;
+            canvas.height = container.clientHeight - 100;
+            
+            const width = canvas.width;
+            const height = canvas.height;
+            
+            const padding = { top: 20, right: 20, bottom: 40, left: 50 };
+            const chartWidth = width - padding.left - padding.right;
+            const chartHeight = height - padding.top - padding.bottom;
+            
+            ctx.clearRect(0, 0, width, height);
+            
+            const data = [];
+            for (let day = 1; day <= NUM_DAYS; day++) {
+                let total = 0;
+                for (let i = 0; i < NUM_PROTOCOLS; i++) {
+                    if (trackerData.checkboxes[`${i}-${day}`]) {
+                        total++;
+                    }
+                }
+                data.push(total);
+            }
+            
+            // Count non-empty protocols
+            const filledProtocols = trackerData.protocols.filter(p => p.trim() !== '').length;
+            const maxValue = filledProtocols > 0 ? filledProtocols : NUM_PROTOCOLS;
+            const xStep = chartWidth / (NUM_DAYS - 1);
+            const yStep = chartHeight / maxValue;
+            
+            // Draw Y-axis
+            ctx.strokeStyle = '#333';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(padding.left, padding.top);
+            ctx.lineTo(padding.left, padding.top + chartHeight);
+            ctx.stroke();
+            
+            // Draw X-axis
+            ctx.beginPath();
+            ctx.moveTo(padding.left, padding.top + chartHeight);
+            ctx.lineTo(padding.left + chartWidth, padding.top + chartHeight);
+            ctx.stroke();
+            
+            // Draw Y-axis labels and grid lines
+            ctx.fillStyle = '#666';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'right';
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 1;
+            
+            for (let i = 0; i <= maxValue; i++) {
+                const y = padding.top + chartHeight - (i * yStep);
+                ctx.fillText(i.toString(), padding.left - 10, y + 4);
+                
+                // Grid lines
+                ctx.setLineDash([2, 2]);
+                ctx.beginPath();
+                ctx.moveTo(padding.left, y);
+                ctx.lineTo(padding.left + chartWidth, y);
+                ctx.stroke();
+            }
+            ctx.setLineDash([]);
+            
+            // Draw X-axis labels
+            ctx.textAlign = 'center';
+            for (let day = 1; day <= NUM_DAYS; day += 2) {
+                const x = padding.left + ((day - 1) * xStep);
+                ctx.fillText(day.toString(), x, padding.top + chartHeight + 20);
+            }
+            
+            // Draw axis labels
+            ctx.save();
+            ctx.translate(15, padding.top + chartHeight / 2);
+            ctx.rotate(-Math.PI / 2);
+            ctx.textAlign = 'center';
+            ctx.font = 'bold 14px Arial';
+            ctx.fillStyle = '#333';
+            ctx.fillText('Tasks Completed', 0, 0);
+            ctx.restore();
+            
+            ctx.textAlign = 'center';
+            ctx.font = 'bold 14px Arial';
+            ctx.fillText('Day', padding.left + chartWidth / 2, height - 10);
+            
+            // Draw line chart
+            ctx.strokeStyle = '#4CAF50';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            
+            for (let i = 0; i < data.length; i++) {
+                const x = padding.left + (i * xStep);
+                const y = padding.top + chartHeight - (data[i] * yStep);
+                
+                if (i === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.stroke();
+            
+            // Draw dots
+            for (let i = 0; i < data.length; i++) {
+                const x = padding.left + (i * xStep);
+                const y = padding.top + chartHeight - (data[i] * yStep);
+                
+                ctx.fillStyle = '#4CAF50';
+                ctx.beginPath();
+                ctx.arc(x, y, 5, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.strokeStyle = 'white';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+        }
+
+        window.addEventListener('resize', drawChart);
+
+        initializeData();
+        renderProtocols();
+    </script>
+</body>
+</html>
